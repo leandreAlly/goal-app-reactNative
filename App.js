@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button, FlatList, StyleSheet, View } from 'react-native';
+import { Button, FlatList, StyleSheet, View, Alert } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import GoalInput from './components/GoalInput';
 import GoalItem from './components/GoalItem';
 
@@ -16,6 +17,10 @@ export default function App() {
   }
 
   function addGoalHandler(enteredGoalText) {
+    if (enteredGoalText == '') {
+      Alert.alert('Please add goal');
+      return;
+    }
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
@@ -30,6 +35,7 @@ export default function App() {
   }
 
   return (
+    // <StatusBar style="auto" />
     <View style={styles.appContainer}>
       <Button
         title="Add New Goal"
